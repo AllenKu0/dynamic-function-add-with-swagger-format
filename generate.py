@@ -26,7 +26,7 @@ def generate_api_code(yaml_file):
                         json_data += f"'{param}': {param}, "
 
                     print("json_data",json_data)    
-                    parameters = parameters.rstrip(", ")                # Handle GET, POST, PUT, DELETE
+                    parameters = parameters.rstrip(", ")
                     json_data = "{"+ json_data.rstrip(", ") + "}" 
                 method_code = f"""
 def {method}{path.replace('/', '_').replace('{', '').replace('}', '')}({parameters}):
@@ -57,7 +57,6 @@ def {method}{path.replace('/', '_').replace('{', '').replace('}', '')}({paramete
 if __name__=='__main__':
     python_code = generate_api_code("api.yaml")
 
-    # 輸出到文件
     with open("api_client.py", "w", encoding="utf-8") as f:
         f.write(python_code)
 
