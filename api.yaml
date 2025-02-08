@@ -1,0 +1,89 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: 用於測試的 API
+  version: 1.0.0
+
+servers:
+  - url: http://api.example.com/v1
+    description: 主要生產環境
+  - url: http://staging-api.example.com
+    description: 測試環境
+
+paths:
+  /users:
+    get:
+      summary: 獲取用戶列表
+      description: 這個 API 會返回所有用戶的列表
+      responses:
+        "200":
+          description: 成功返回用戶列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+    post:
+      summary: 創建新用戶
+      description: 提交用戶數據以創建新用戶
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+      responses:
+        "201":
+          description: 用戶創建成功
+
+  /users/{user_id}:
+    get:
+      summary: 獲取特定用戶信息
+      description: 根據用戶 ID 獲取對應的用戶信息
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: 成功返回用戶信息
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  email:
+                    type: string
+    put:
+      summary: 更新用戶信息
+      description: 根據用戶 ID 更新對應的用戶信息
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+      responses:
+        "200":
+          description: 用戶信息更新成功
+    delete:
+      summary: 刪除用戶
+      description: 根據用戶 ID 刪除用戶
+      responses:
+        "204":
+          description: 用戶刪除成功
